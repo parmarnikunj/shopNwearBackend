@@ -20,15 +20,32 @@ class ProductService {
   }
   public products = productModel;
   
-  public async findAllPoductByGender(genderQuery: string ): Promise<Product[]> {
-    return this.products.filter(p => p.gender === genderQuery)
+  public async findAllPoductByGender(
+    genderQuery: string,
+    limit: number = 100,
+    page: number= 1): Promise<Product[]> {
+    return this
+    .products
+    .filter(p => p.gender === genderQuery)
+    .slice((page-1)*limit, page*limit)
+    
   }
-  public async findAllProductsBySalePrice(salesPriceQeury: string): Promise<Product[]> {
-    return this.products.filter(p => p.sale_price === salesPriceQeury) 
+  public async findAllProductsBySalePrice(
+    salesPriceQeury: string,
+    limit:number=100,
+    page:number =1
+    ): Promise<Product[]> {
+    return this
+    .products
+    .filter(p => p.sale_price === salesPriceQeury) 
+    .slice((page-1)*limit, page*limit)
   }
-  public async findAllProducts(): Promise<Product[]> {
+  public async findAllProducts(
+    limit:number=100,
+    page:number=1): Promise<Product[]> {
     const products: Product[] = this.products;
-    return products;
+    return products
+    .slice((page-1)*limit, page*limit);
   }
 
   public async findProductById(gtin: string): Promise<Product> {

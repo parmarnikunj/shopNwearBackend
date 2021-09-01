@@ -7,3 +7,10 @@ export interface Product {
     image_link: string;
     additional_image_link: string
 }
+
+export interface ProductQuery {
+    gender: string
+    sale_price: string
+    page: number
+    limit: number
+}
